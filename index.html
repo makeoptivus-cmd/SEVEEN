@@ -3,45 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OPTIVUS - Grow Revenue, Less Expense.</title>
+  <title>Nexus Intelligence - Increase Profit. Reduce Cost. Stay Ahead.</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="premium-bg text-white overflow-x-hidden">
   <!-- Navigation -->
   <nav class="fixed top-0 w-full z-50 nav-blur border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 py-4">
-      <div class="flex justify-between items-center">
-        <div class="text-2xl font-bold poppins gradient-text">OPTIVUS</div>
-        <div class="hidden md:flex space-x-8 text-sm font-medium">
-          <a href="#services" class="hover:text-blue-400 transition-colors">Services</a>
-          <a href="#advantage" class="hover:text-blue-400 transition-colors">Advantage</a>
-          <a href="#results" class="hover:text-blue-400 transition-colors">Results</a>
-          <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
-          <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
-        </div>
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold poppins gradient-text">NEXUS</div>
+      <div class="hidden md:flex space-x-8 text-sm font-medium">
+        <a href="#services" class="hover:text-blue-400 transition-colors">Services</a>
+        <a href="#advantage" class="hover:text-blue-400 transition-colors">Advantage</a>
+        <a href="#results" class="hover:text-blue-400 transition-colors">Results</a>
+        <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+        <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <section class="min-h-screen flex items-center justify-center relative pt-20">
-    <!-- Animated Background -->
-    <div class="particle-container">
-      <div class="gradient-wave"></div>
-    </div>
-    
+    <div class="particle-container"><div class="gradient-wave"></div></div>
     <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
       <h1 class="text-6xl md:text-8xl font-black poppins mb-8 fade-in-up">
-        <span class="gradient-text">Grow Revenue.</span><br/>
-        <span class="gradient-text">Less Expense.</span><br/>
+        <span class="gradient-text">Increase Profit.</span><br/>
+        <span class="gradient-text">Reduce Cost.</span><br/>
+        <span class="gradient-text">Stay Ahead.</span>
       </h1>
-      <p class="text-2xl md:text-3xl mb-6 text-gray-300 fade-in-up font-light">
-        We don't just do better.
-      </p>
-      <p class="text-2xl md:text-3xl mb-12 neon-blue fade-in-up font-semibold">
-        We make you unbeatable.
-      </p>
+      <p class="text-2xl md:text-3xl mb-6 text-gray-300 fade-in-up font-light">We don't just do better.</p>
+      <p class="text-2xl md:text-3xl mb-12 neon-blue fade-in-up font-semibold">We make you unbeatable.</p>
       <button class="premium-button px-12 py-6 rounded-full text-xl font-semibold text-black fade-in-up" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
         Let's Build Your Advantage
       </button>
@@ -79,30 +70,83 @@
 
   <!-- Advantage Section -->
   <section id="advantage" class="py-32 relative scroll-reveal">
-    <!-- (rest of content preserved exactly same as original) -->
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <h2 class="text-5xl md:text-6xl font-bold poppins mb-8 gradient-text">The Nexus Advantage</h2>
+        <p class="text-xl text-gray-300 mb-8">Most businesses compete. Our clients dominate. With Nexus Intelligence, you're not playing the same game as your competitors—you're playing a superior one.</p>
+        <ul class="space-y-6">
+          <li class="flex items-start space-x-4"><span class="text-2xl neon-blue">⚡</span><p class="text-lg">AI-powered automation that reduces operational costs by up to 70%.</p></li>
+          <li class="flex items-start space-x-4"><span class="text-2xl neon-green">🚀</span><p class="text-lg">Systems that scale infinitely without scaling costs.</p></li>
+          <li class="flex items-start space-x-4"><span class="text-2xl neon-blue">🔒</span><p class="text-lg">Proprietary frameworks designed to protect and expand market share.</p></li>
+        </ul>
+      </div>
+      <div class="relative">
+        <div class="premium-card rounded-2xl p-10 relative z-10">
+          <h3 class="text-3xl font-bold mb-6 poppins">What This Means For You</h3>
+          <ul class="space-y-4 text-gray-300 text-lg">
+            <li>✅ Higher profit margins</li>
+            <li>✅ Lower operating costs</li>
+            <li>✅ Predictable lead flow</li>
+            <li>✅ Unbeatable market position</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Results Section -->
   <section id="results" class="py-32 relative scroll-reveal">
-    <!-- (rest of content preserved exactly same as original) -->
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-5xl md:text-6xl font-bold poppins mb-20 gradient-text">Proven Results</h2>
+      <div class="grid md:grid-cols-3 gap-12">
+        <div><h3 id="profitStat" class="text-6xl font-black gradient-text mb-4">0%</h3><p class="text-xl text-gray-300">Average Profit Growth</p></div>
+        <div><h3 id="costStat" class="text-6xl font-black gradient-text mb-4">0%</h3><p class="text-xl text-gray-300">Operational Cost Reduction</p></div>
+        <div><h3 id="leadStat" class="text-6xl font-black gradient-text mb-4">0%</h3><p class="text-xl text-gray-300">Increase in Qualified Leads</p></div>
+      </div>
+    </div>
   </section>
 
   <!-- About Section -->
   <section id="about" class="py-32 relative scroll-reveal">
-    <!-- (rest of content preserved exactly same as original) -->
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h2 class="text-5xl md:text-6xl font-bold poppins mb-12 gradient-text">About Nexus Intelligence</h2>
+      <p class="text-xl text-gray-300 leading-relaxed mb-12">We are not a marketing agency. We are not consultants. Nexus is a force multiplier for ambitious businesses. Our mission is simple: engineer the systems that make your business unstoppable.</p>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="premium-card p-8 rounded-2xl"><h3 class="text-3xl font-bold mb-4 poppins gradient-text">10+</h3><p class="text-lg text-gray-300">Years of combined expertise in AI, automation, and business strategy.</p></div>
+        <div class="premium-card p-8 rounded-2xl"><h3 class="text-3xl font-bold mb-4 poppins gradient-text">100+</h3><p class="text-lg text-gray-300">Businesses transformed with proven, repeatable systems.</p></div>
+        <div class="premium-card p-8 rounded-2xl"><h3 class="text-3xl font-bold mb-4 poppins gradient-text">∞</h3><p class="text-lg text-gray-300">Potential for growth, because systems scale infinitely.</p></div>
+      </div>
+    </div>
   </section>
 
   <!-- Contact Section -->
   <section id="contact" class="py-32 relative scroll-reveal">
-    <!-- (rest of content preserved exactly same as original) -->
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-5xl md:text-6xl font-bold poppins mb-12 gradient-text">Start Your Transformation</h2>
+      <p class="text-xl text-gray-300 mb-12">The longer you wait, the further ahead your competitors get. The right time to start was yesterday. The next best time is now.</p>
+      <form onsubmit="handleSubmit(event)" class="grid gap-6">
+        <input type="text" placeholder="Your Name" required class="input-premium p-4 rounded-xl"/>
+        <input type="email" placeholder="Your Email" required class="input-premium p-4 rounded-xl"/>
+        <textarea placeholder="Your Challenge (Let's solve it)" required class="input-premium p-4 rounded-xl h-40"></textarea>
+        <button type="submit" class="premium-button px-12 py-6 rounded-full text-xl font-semibold text-black">Claim Your Competitive Edge</button>
+      </form>
+    </div>
   </section>
 
   <!-- Footer -->
   <footer class="py-16 border-t border-white/10 relative">
-    <!-- (rest of content preserved exactly same as original) -->
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h3 class="text-2xl font-bold poppins gradient-text mb-6">Nexus Intelligence</h3>
+      <p class="text-gray-400 mb-6">Increase Profit. Reduce Cost. Stay Ahead.</p>
+      <div class="flex justify-center space-x-6 mb-8">
+        <a href="#" class="hover:text-blue-400">LinkedIn</a>
+        <a href="#" class="hover:text-blue-400">Twitter</a>
+        <a href="#" class="hover:text-blue-400">Contact</a>
+      </div>
+      <p class="text-gray-500 text-sm">© 2025 Nexus Intelligence. All rights reserved.</p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
 </body>
 </html>
-
