@@ -1,51 +1,104 @@
-// Smooth scroll to contact
-function scrollToContact() {
-  const contact = document.getElementById("contact");
-  if (contact) {
-    contact.scrollIntoView({ behavior: "smooth" });
+// Create floating particles
+function createParticles() {
+  const container = document.querySelector('.particle-container');
+  for (let i = 0; i < 50; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 20 + 's';
+    particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+    container.appendChild(particle);
   }
 }
 
-// Scroll reveal effect
-const revealElements = document.querySelectorAll(".scroll-reveal");
-window.addEventListener("scroll", () => {
-  revealElements.forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      el.classList.add("revealed");
+// Scroll reveal
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      if (entry.target.id === 'results') animateStats();
     }
   });
-});
+}, observerOptions);
+document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
 
-// Counter animation for stats
-function animateCounter(id, target) {
-  let el = document.getElementById(id);
-  if (!el) return;
-  let count = 0;
-  let step = target / 100;
-  let interval = setInterval(() => {
-    count += step;
-    if (count >= target) {
-      count = target;
-      clearInterval(interval);
+// Animate statistics
+function animateStats() {
+  animateStat('profitStat', 0, 247, '%', 2000);
+  animateStat('costStat', 0, 58, '%', 2000);
+  animateStat('leadStat', 0, 312, '%', 2000);
+}
+function animateStat(id, start, end, suffix, duration) {
+  const element = document.getElementById(id);
+  const range = end - start;
+  const increment = range / (duration / 16);
+  let current = start;
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= end) {
+      current = end;
+      clearInterval(timer);
     }
-    el.textContent = Math.floor(count) + "%";
-  }, 20);
+    element.textContent = Math.floor(current) + suffix;
+  }, 16);
 }
 
-window.addEventListener("load", () => {
-  animateCounter("profitStat", 240);
-  animateCounter("costStat", 60);
-  animateCounter("leadStat", 320);
+// Testimonial carousel
+let currentTestimonial = 0;
+const testimonials = document.querySelectorAll('.testimonial-card');
+const dots = document.querySelectorAll('.testimonial-dot');
+function showTestimonial(index) {
+  testimonials.forEach((card, i) => card.classList.toggle('active', i === index));
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === index);
+    dot.classList.toggle('bg-blue-400', i === index);
+    dot.classList.toggle('bg-gray-600', i !== index);
+  });
+  currentTestimonial = index;
+}
+setInterval(() => {
+  currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+  showTestimonial(currentTestimonial);
+}, 8000);
+
+// Form submission
+function handleSubmit(event) {
+  event.preventDefault();
+  const button = event.target.querySelector('button[type="submit"]');
+  const originalText = button.textContent;
+  button.textContent = 'Processing...';
+  button.disabled = true;
+  setTimeout(() => {
+    button.textContent = 'Transformation Initiated ✓';
+    button.style.background = 'linear-gradient(135deg, #39ff14 0%, #00d4ff 100%)';
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+      button.style.background = 'linear-gradient(135deg, #00d4ff 0%, #39ff14 100%)';
+      event.target.reset();
+    }, 3000);
+  }, 2000);
+}
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 });
 
-// Testimonial carousel
-const testimonials = document.querySelectorAll(".testimonial-card");
-let currentIndex = 0;
-setInterval(() => {
-  testimonials.forEach((t, i) => {
-    t.classList.remove("active");
-    if (i === currentIndex) t.classList.add("active");
+// Parallax effect
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const parallaxElements = document.querySelectorAll('.parallax-element');
+  parallaxElements.forEach((element, index) => {
+    const speed = (index + 1) * 0.1;
+    element.style.transform = `translateY(${scrolled * speed}px)`;
   });
-  currentIndex = (currentIndex + 1) % testimonials.length;
-}, 5000);
+});
+
+// Initialize
+document.addEventListener('DOMContentLoaded', createParticles);
