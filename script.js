@@ -1,3 +1,40 @@
+function handleSubmit(event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const data = {
+    name: form.querySelector('input[type="text"]').value,
+    email: form.querySelector('input[type="email"]').value,
+    challenge: form.querySelector('textarea').value,
+  };
+
+  const button = form.querySelector('button[type="submit"]');
+  const originalText = button.textContent;
+  button.textContent = 'Processing...';
+  button.disabled = true;
+
+  fetch("https://script.google.com/macros/s/AKfycbytuGtpDFx-8OUAeYUVgpGpBmna8Gcp1YmHRKjWZtNHlSolyZcbLkCockXzIMMwzC7p/exec", {
+    method: "POST",
+    mode: "no-cors", // if you don't need a response
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+  .then(() => {
+    button.textContent = 'Transformation Initiated ✓';
+    button.style.background = 'linear-gradient(135deg, #39ff14 0%, #00d4ff 100%)';
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+      form.reset();
+    }, 3000);
+  })
+  .catch(err => {
+    console.error(err);
+    button.textContent = 'Error, Try Again';
+    button.disabled = false;
+  });
+}
+
 // Create floating particles
 function createParticles() {
   const container = document.querySelector('.particle-container');
@@ -99,3 +136,4 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
+
