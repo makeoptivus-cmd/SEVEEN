@@ -78,7 +78,7 @@ function handleSubmit(event) {
   button.textContent = 'Processing...';
   button.disabled = true;
 
-  fetch("https://script.google.com/macros/s/AKfycbytuGtpDFx-8OUAeYUVgpGpBmna8Gcp1YmHRKjWZtNHlSolyZcbLkCockXzIMMwzC7p/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbwS52GAUGzrBNWY2c-K8SiB4bBvX0ZoGtM8qIQa7kD41K2ZKns4_X-qbf1RcMQOs0dweA/exec", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -121,3 +121,4 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
+
