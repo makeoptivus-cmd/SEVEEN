@@ -17,7 +17,7 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('revealed');
-      if (entry.target.id === 'results') animateStats();
+      if (entry.target.id === 'results') { animateStats(); }
     }
   });
 }, observerOptions);
@@ -36,10 +36,7 @@ function animateStat(id, start, end, suffix, duration) {
   let current = start;
   const timer = setInterval(() => {
     current += increment;
-    if (current >= end) {
-      current = end;
-      clearInterval(timer);
-    }
+    if (current >= end) { current = end; clearInterval(timer); }
     element.textContent = Math.floor(current) + suffix;
   }, 16);
 }
@@ -48,8 +45,9 @@ function animateStat(id, start, end, suffix, duration) {
 let currentTestimonial = 0;
 const testimonials = document.querySelectorAll('.testimonial-card');
 const dots = document.querySelectorAll('.testimonial-dot');
+
 function showTestimonial(index) {
-  testimonials.forEach((card, i) => card.classList.toggle('active', i === index));
+  testimonials.forEach((card, i) => { card.classList.toggle('active', i === index); });
   dots.forEach((dot, i) => {
     dot.classList.toggle('active', i === index);
     dot.classList.toggle('bg-blue-400', i === index);
@@ -93,12 +91,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Parallax effect
 window.addEventListener('scroll', () => {
   const scrolled = window.pageYOffset;
-  const parallaxElements = document.querySelectorAll('.parallax-element');
-  parallaxElements.forEach((element, index) => {
+  document.querySelectorAll('.parallax-element').forEach((el, index) => {
     const speed = (index + 1) * 0.1;
-    element.style.transform = `translateY(${scrolled * speed}px)`;
+    el.style.transform = `translateY(${scrolled * speed}px)`;
   });
 });
 
 // Initialize
-document.addEventListener('DOMContentLoaded', createParticles);
+document.addEventListener('DOMContentLoaded', () => { createParticles(); });
