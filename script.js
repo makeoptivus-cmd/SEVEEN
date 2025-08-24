@@ -1,40 +1,3 @@
-function handleSubmit(event) {
-  event.preventDefault();
-
-  const form = event.target;
-  const data = {
-    name: form.querySelector('input[type="text"]').value,
-    email: form.querySelector('input[type="email"]').value,
-    challenge: form.querySelector('textarea').value,
-  };
-
-  const button = form.querySelector('button[type="submit"]');
-  const originalText = button.textContent;
-  button.textContent = 'Processing...';
-  button.disabled = true;
-
-  fetch("https://script.google.com/macros/s/AKfycbytuGtpDFx-8OUAeYUVgpGpBmna8Gcp1YmHRKjWZtNHlSolyZcbLkCockXzIMMwzC7p/exec", {
-    method: "POST",
-    mode: "no-cors", // if you don't need a response
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  })
-  .then(() => {
-    button.textContent = 'Transformation Initiated ✓';
-    button.style.background = 'linear-gradient(135deg, #39ff14 0%, #00d4ff 100%)';
-    setTimeout(() => {
-      button.textContent = originalText;
-      button.disabled = false;
-      form.reset();
-    }, 3000);
-  })
-  .catch(err => {
-    console.error(err);
-    button.textContent = 'Error, Try Again';
-    button.disabled = false;
-  });
-}
-
 // Create floating particles
 function createParticles() {
   const container = document.querySelector('.particle-container');
@@ -92,28 +55,50 @@ function showTestimonial(index) {
   });
   currentTestimonial = index;
 }
-setInterval(() => {
-  currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-  showTestimonial(currentTestimonial);
-}, 8000);
+if (testimonials.length > 0) {
+  setInterval(() => {
+    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+    showTestimonial(currentTestimonial);
+  }, 8000);
+}
 
-// Form submission
+// ====== FORM SUBMISSION TO GOOGLE SHEETS ======
 function handleSubmit(event) {
   event.preventDefault();
-  const button = event.target.querySelector('button[type="submit"]');
+
+  const form = event.target;
+  const data = {
+    name: form.querySelector('input[type="text"]').value,
+    email: form.querySelector('input[type="email"]').value,
+    challenge: form.querySelector('textarea').value,
+  };
+
+  const button = form.querySelector('button[type="submit"]');
   const originalText = button.textContent;
   button.textContent = 'Processing...';
   button.disabled = true;
-  setTimeout(() => {
-    button.textContent = 'Transformation Initiated ✓';
-    button.style.background = 'linear-gradient(135deg, #39ff14 0%, #00d4ff 100%)';
-    setTimeout(() => {
-      button.textContent = originalText;
+
+  fetch("https://script.google.com/macros/s/AKfycbytuGtpDFx-8OUAeYUVgpGpBmna8Gcp1YmHRKjWZtNHlSolyZcbLkCockXzIMMwzC7p/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+    .then(res => res.json())
+    .then(response => {
+      console.log("Google Sheets response:", response);
+      button.textContent = 'Transformation Initiated ✓';
+      button.style.background = 'linear-gradient(135deg, #39ff14 0%, #00d4ff 100%)';
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+        form.reset();
+      }, 3000);
+    })
+    .catch(err => {
+      console.error("Error:", err);
+      button.textContent = 'Error, Try Again';
       button.disabled = false;
-      button.style.background = 'linear-gradient(135deg, #00d4ff 0%, #39ff14 100%)';
-      event.target.reset();
-    }, 3000);
-  }, 2000);
+    });
 }
 
 // Smooth scrolling
@@ -136,4 +121,3 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
-
