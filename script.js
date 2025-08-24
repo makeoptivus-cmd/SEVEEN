@@ -1,7 +1,15 @@
-// Scroll reveal
-const reveals = document.querySelectorAll(".scroll-reveal");
+// Smooth scroll to contact
+function scrollToContact() {
+  const contact = document.getElementById("contact");
+  if (contact) {
+    contact.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+// Scroll reveal effect
+const revealElements = document.querySelectorAll(".scroll-reveal");
 window.addEventListener("scroll", () => {
-  reveals.forEach((el) => {
+  revealElements.forEach(el => {
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight - 100) {
       el.classList.add("revealed");
@@ -9,9 +17,10 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// Stats counter
-function animateStat(id, target) {
+// Counter animation for stats
+function animateCounter(id, target) {
   let el = document.getElementById(id);
+  if (!el) return;
   let count = 0;
   let step = target / 100;
   let interval = setInterval(() => {
@@ -23,59 +32,20 @@ function animateStat(id, target) {
     el.textContent = Math.floor(count) + "%";
   }, 20);
 }
+
 window.addEventListener("load", () => {
-  animateStat("profitStat", 240);
-  animateStat("costStat", 60);
-  animateStat("leadStat", 320);
+  animateCounter("profitStat", 240);
+  animateCounter("costStat", 60);
+  animateCounter("leadStat", 320);
 });
 
-// Testimonial carousel auto switch
+// Testimonial carousel
 const testimonials = document.querySelectorAll(".testimonial-card");
-let current = 0;
+let currentIndex = 0;
 setInterval(() => {
-  testimonials[current].classList.remove("active");
-  current = (current + 1) % testimonials.length;
-  testimonials[current].classList.add("active");
+  testimonials.forEach((t, i) => {
+    t.classList.remove("active");
+    if (i === currentIndex) t.classList.add("active");
+  });
+  currentIndex = (currentIndex + 1) % testimonials.length;
 }, 5000);
-// Replace with your Google Apps Script Web App URL
-const scriptURL = "https://script.google.com/macros/s/AKfycby6PyQoLKQga-Cwao9uw0zhLwsNPRrFYIore2GNAO_oHDjQbUJdb7Qky4_3uLwNMw3Spg/exec";
-
-document.getElementById("sheetForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const form = e.target;
-  const button = form.querySelector("button");
-  const originalText = button.textContent;
-
-  const data = {
-    name: form.name.value.trim(),
-    email: form.email.value.trim(),
-    challenge: form.challenge.value.trim()
-  };
-
-  button.textContent = "Processing...";
-  button.disabled = true;
-
-  try {
-    const res = await fetch(scriptURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
-    const response = await res.json();
-
-    if (response.result === "success") {
-      button.textContent = "Submitted ✓";
-      form.reset();
-    } else {
-      button.textContent = "Error: " + response.error;
-    }
-  } catch (err) {
-    button.textContent = "Error: " + err.message;
-  }
-
-  setTimeout(() => {
-    button.textContent = originalText;
-    button.disabled = false;
-  }, 3000);
-});
-
