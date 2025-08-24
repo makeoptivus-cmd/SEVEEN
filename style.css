@@ -1,17 +1,11 @@
-function scrollToContact() {
-  const contact = document.getElementById("contact");
-  if (contact) {
-    contact.scrollIntoView({ behavior: "smooth" });
-  }
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
-// Scroll reveal effect
-const revealElements = document.querySelectorAll(".scroll-reveal");
-window.addEventListener("scroll", () => {
-  revealElements.forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      el.classList.add("revealed");
-    }
-  });
-});
+* { font-family: 'Inter', sans-serif; }
+.poppins { font-family: 'Poppins', sans-serif; }
+
+.premium-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%); position: relative; }
+.neon-blue { color: #00d4ff; }
+.neon-green { color: #39ff14; }
+.gradient-text { background: linear-gradient(135deg, #00d4ff 0%, #39ff14 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* Keep ALL your CSS exactly as in your provided code */
