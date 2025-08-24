@@ -1,6 +1,7 @@
-// Create floating particles
+// ================== CREATE FLOATING PARTICLES ==================
 function createParticles() {
   const container = document.querySelector('.particle-container');
+  if (!container) return;
   for (let i = 0; i < 50; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
@@ -11,7 +12,7 @@ function createParticles() {
   }
 }
 
-// Scroll reveal
+// ================== SCROLL REVEAL ==================
 const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -23,7 +24,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
 
-// Animate statistics
+// ================== ANIMATE STATISTICS ==================
 function animateStats() {
   animateStat('profitStat', 0, 247, '%', 2000);
   animateStat('costStat', 0, 58, '%', 2000);
@@ -31,6 +32,7 @@ function animateStats() {
 }
 function animateStat(id, start, end, suffix, duration) {
   const element = document.getElementById(id);
+  if (!element) return;
   const range = end - start;
   const increment = range / (duration / 16);
   let current = start;
@@ -41,7 +43,7 @@ function animateStat(id, start, end, suffix, duration) {
   }, 16);
 }
 
-// Testimonial carousel
+// ================== TESTIMONIAL CAROUSEL ==================
 let currentTestimonial = 0;
 const testimonials = document.querySelectorAll('.testimonial-card');
 const dots = document.querySelectorAll('.testimonial-dot');
@@ -62,15 +64,15 @@ if (testimonials.length > 0) {
   }, 8000);
 }
 
-// ====== FORM SUBMISSION TO GOOGLE SHEETS ======
+// ================== FORM SUBMISSION TO GOOGLE SHEETS ==================
 function handleSubmit(event) {
   event.preventDefault();
 
   const form = event.target;
   const data = {
-    name: form.querySelector('input[type="text"]').value,
-    email: form.querySelector('input[type="email"]').value,
-    challenge: form.querySelector('textarea').value,
+    name: form.querySelector('input[type="text"]').value.trim(),
+    email: form.querySelector('input[type="email"]').value.trim(),
+    challenge: form.querySelector('textarea').value.trim(),
   };
 
   const button = form.querySelector('button[type="submit"]');
@@ -78,30 +80,38 @@ function handleSubmit(event) {
   button.textContent = 'Processing...';
   button.disabled = true;
 
-  fetch("https://script.google.com/macros/s/AKfycbwGTyTmjFyRM81sAOfPbIxuBBCSaPwmAd3rll_y0VBiYTQz0QqZryW9dRJ3MviOKltejw/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbxQ9A24zmcHyjULoXaqFzh1FnytJUgDAbSQT1NF5N8MFzXC5ONsnMd3up0UJlOhOD18Tw/exec", {   // Replace with your deployed Apps Script exec URL
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    })
     .then(response => {
       console.log("Google Sheets response:", response);
-      button.textContent = 'Transformation Initiated ✓';
-      button.style.background = 'linear-gradient(135deg, #39ff14 0%, #00d4ff 100%)';
-      setTimeout(() => {
-        button.textContent = originalText;
-        button.disabled = false;
-        form.reset();
-      }, 3000);
+      if (response.result === "success") {
+        button.textContent = 'Transformation Initiated ✓';
+        button.style.background = 'linear-gradient(135deg, #39ff14 0%, #00d4ff 100%)';
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.disabled = false;
+          button.style.background = '';
+          form.reset();
+        }, 3000);
+      } else {
+        throw new Error(response.error || "Script error");
+      }
     })
     .catch(err => {
       console.error("Error:", err);
-      button.textContent = 'Error, Try Again';
+      button.textContent = 'Error: ' + err.message;
       button.disabled = false;
     });
 }
 
-// Smooth scrolling
+// ================== SMOOTH SCROLLING ==================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
@@ -110,7 +120,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// Parallax effect
+// ================== PARALLAX EFFECT ==================
 window.addEventListener('scroll', () => {
   const scrolled = window.pageYOffset;
   document.querySelectorAll('.parallax-element').forEach((el, index) => {
@@ -119,8 +129,7 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => { createParticles(); });
-
-
-
+// ================== INITIALIZE ==================
+document.addEventListener('DOMContentLoaded', () => {
+  createParticles();
+});
