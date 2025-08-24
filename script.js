@@ -37,3 +37,45 @@ setInterval(() => {
   current = (current + 1) % testimonials.length;
   testimonials[current].classList.add("active");
 }, 5000);
+// Replace with your Google Apps Script Web App URL
+const scriptURL = "https://script.google.com/macros/s/AKfycby6PyQoLKQga-Cwao9uw0zhLwsNPRrFYIore2GNAO_oHDjQbUJdb7Qky4_3uLwNMw3Spg/exec";
+
+document.getElementById("sheetForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const button = form.querySelector("button");
+  const originalText = button.textContent;
+
+  const data = {
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    challenge: form.challenge.value.trim()
+  };
+
+  button.textContent = "Processing...";
+  button.disabled = true;
+
+  try {
+    const res = await fetch(scriptURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    const response = await res.json();
+
+    if (response.result === "success") {
+      button.textContent = "Submitted ✓";
+      form.reset();
+    } else {
+      button.textContent = "Error: " + response.error;
+    }
+  } catch (err) {
+    button.textContent = "Error: " + err.message;
+  }
+
+  setTimeout(() => {
+    button.textContent = originalText;
+    button.disabled = false;
+  }, 3000);
+});
+
