@@ -86,23 +86,6 @@ setInterval(() => {
 }, 8000);
 
 // Form submission
-function handleSubmit(event) {
-  event.preventDefault();
-  const button = event.target.querySelector('button[type="submit"]');
-  const originalText = button.textContent;
-  button.textContent = 'Processing...';
-  button.disabled = true;
-  setTimeout(() => {
-    button.textContent = 'Transformation Initiated ✓';
-    button.style.background = 'linear-gradient(135deg, #39ff14 0%, #00d4ff 100%)';
-    setTimeout(() => {
-      button.textContent = originalText;
-      button.disabled = false;
-      button.style.background = 'linear-gradient(135deg, #00d4ff 0%, #39ff14 100%)';
-      event.target.reset();
-    }, 3000);
-  }, 2000);
-}
 
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -124,6 +107,7 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
+
 
 
 
