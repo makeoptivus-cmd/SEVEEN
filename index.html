@@ -147,7 +147,28 @@
   </footer>
 
   <script src="script.js"></script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js"></script>
+
+<script>
+  // Your Firebase config (replace with your own)
+  const firebaseConfig = {
+    apiKey: "AIzaSyDYeSu2BDMpdQ042B07l6y_a4g1GeJl8Yk",
+  authDomain: "optivus-b179b.firebaseapp.com",
+  projectId: "optivus-b179b",
+  storageBucket: "optivus-b179b.firebasestorage.app",
+  messagingSenderId: "475218201986",
+  appId: "1:475218201986:web:d8b3e299b670b654a5539b",
+  measurementId: "G-QMRV28NFK6"
+  };
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const database = firebase.database(app);
+</script>
 </body>
 </html>
+
 
 
