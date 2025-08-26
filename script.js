@@ -1,11 +1,3 @@
- headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  .then(res => res.json())
-  .then(data => alert(data.message))
-  .catch(err => alert("Error: " + err));
-});
 // Create floating particles
 function createParticles() {
   const container = document.querySelector('.particle-container');
@@ -69,6 +61,23 @@ setInterval(() => {
 }, 8000);
 
 // Form submission
+function handleSubmit(event) {
+  event.preventDefault();
+  const button = event.target.querySelector('button[type="submit"]');
+  const originalText = button.textContent;
+  button.textContent = 'Processing...';
+  button.disabled = true;
+  setTimeout(() => {
+    button.textContent = 'Transformation Initiated ✓';
+    button.style.background = 'linear-gradient(135deg, #39ff14 0%, #00d4ff 100%)';
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+      button.style.background = 'linear-gradient(135deg, #00d4ff 0%, #39ff14 100%)';
+      event.target.reset();
+    }, 3000);
+  }, 2000);
+}
 
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -78,6 +87,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
 // Parallax effect
 window.addEventListener('scroll', () => {
   const scrolled = window.pageYOffset;
@@ -86,29 +96,6 @@ window.addEventListener('scroll', () => {
     el.style.transform = `translateY(${scrolled * speed}px)`;
   });
 });
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
-const scriptURL = "https://script.google.com/macros/s/AKfycbz_q21Mw-OwDtW3MMvoZO3nokBx-r2GOxdGeN4PJUN60ZHcl6YUdles6vZfOVfsI0Ww/exec";
-
-document.getElementById("myForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-
-  fetch(scriptURL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message")
-    })
-  })
-  .then(res => res.json())
-  .then(data => alert(data.message))
-  .catch(err => alert("Error: " + err));
-});
-
-
-
-
-
