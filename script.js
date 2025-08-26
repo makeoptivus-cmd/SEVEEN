@@ -6,6 +6,23 @@
   .then(data => alert(data.message))
   .catch(err => alert("Error: " + err));
 });
+// 🔴 EDIT THIS LINE ONLY 🔴
+const scriptURL = "https://script.google.com/macros/s/AKfycbzNjORX9He6SEDRPJT5lndqTZQIkjxMwMFk5DZMZ0OM1kYu3JF5NbRjz_7MyewjlzOdbw/exec";  
+// Replace with the Web App URL you get after deployment
+
+document.getElementById("myForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message")
+    }),
+
+
 // Create floating particles
 function createParticles() {
   const container = document.querySelector('.particle-container');
@@ -107,20 +124,5 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
-// 🔴 EDIT THIS LINE ONLY 🔴
-const scriptURL = "https://script.google.com/macros/s/AKfycbzNjORX9He6SEDRPJT5lndqTZQIkjxMwMFk5DZMZ0OM1kYu3JF5NbRjz_7MyewjlzOdbw/exec";  
-// Replace with the Web App URL you get after deployment
-
-document.getElementById("myForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-
-  fetch(scriptURL, {
-    method: "POST",
-    body: JSON.stringify({
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message")
-    }),
 
 
