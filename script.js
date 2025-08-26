@@ -137,6 +137,7 @@ window.addEventListener('scroll', () => {
     el.style.transform = `translateY(${scrolled * speed}px)`;
   });
 });
+// Attach form submit event
+document.getElementById("contactForm").addEventListener("submit", handleSubmit);
 
-/
 
