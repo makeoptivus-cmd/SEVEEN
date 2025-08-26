@@ -1,22 +1,3 @@
-// Import Firebase SDKs
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
-
-// Your Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyDYeSu2BDMpdQ042B07l6y_a4g1GeJl8Yk",
-  authDomain: "optivus-b179b.firebaseapp.com",
-  databaseURL: "https://optivus-b179b-default-rtdb.firebaseio.com",
-  projectId: "optivus-b179b",
-  storageBucket: "optivus-b179b.firebasestorage.app",
-  messagingSenderId: "475218201986",
-  appId: "1:475218201986:web:d8b3e299b670b654a5539b",
-  measurementId: "G-QMRV28NFK6"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 // Create floating particles
 function createParticles() {
   const container = document.querySelector('.particle-container');
@@ -80,44 +61,22 @@ setInterval(() => {
 }, 8000);
 
 // Form submission
-async function handleSubmit(event) {
+function handleSubmit(event) {
   event.preventDefault();
-
-  const form = event.target;
-  const name = form.querySelector('input[type="text"]').value;
-  const email = form.querySelector('input[type="email"]').value;
-  const message = form.querySelector('textarea').value;
-
-  const button = form.querySelector('button[type="submit"]');
+  const button = event.target.querySelector('button[type="submit"]');
   const originalText = button.textContent;
   button.textContent = 'Processing...';
   button.disabled = true;
-
-  try {
-    // Save to Firestore
-    await addDoc(collection(db, "contactMessages"), {
-      name,
-      email,
-      message,
-      createdAt: new Date()
-    });
-
-    // Success UI
+  setTimeout(() => {
     button.textContent = 'Transformation Initiated ✓';
     button.style.background = 'linear-gradient(135deg, #39ff14 0%, #00d4ff 100%)';
-    form.reset();
-
-  } catch (error) {
-    console.error("❌ Error adding document: ", error);
-    button.textContent = 'Error, Try Again!';
-  }
-
-  // Reset button after 3s
-  setTimeout(() => {
-    button.textContent = originalText;
-    button.disabled = false;
-    button.style.background = 'linear-gradient(135deg, #00d4ff 0%, #39ff14 100%)';
-  }, 3000);
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+      button.style.background = 'linear-gradient(135deg, #00d4ff 0%, #39ff14 100%)';
+      event.target.reset();
+    }, 3000);
+  }, 2000);
 }
 
 // Smooth scrolling
@@ -137,7 +96,6 @@ window.addEventListener('scroll', () => {
     el.style.transform = `translateY(${scrolled * speed}px)`;
   });
 });
-// Attach form submit event
-document.getElementById("contactForm").addEventListener("submit", handleSubmit);
 
-
+// Initialize
+document.addEventListener('DOMContentLoaded', () => { createParticles(); });
