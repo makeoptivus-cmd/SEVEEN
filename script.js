@@ -99,3 +99,26 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
+document.getElementById("myForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+
+  // Push to Firebase Realtime Database
+  firebase.database().ref("messages").push({
+    name: name,
+    email: email,
+    message: message,
+    createdAt: new Date().toISOString()
+  })
+  .then(() => {
+    alert("Message saved successfully!");
+    document.getElementById("myForm").reset();
+  })
+  .catch(error => {
+    alert("Error: " + error);
+  });
+});
+
