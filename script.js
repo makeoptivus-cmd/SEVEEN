@@ -6,23 +6,6 @@
   .then(data => alert(data.message))
   .catch(err => alert("Error: " + err));
 });
-// 🔴 EDIT THIS LINE ONLY 🔴
-const scriptURL = "https://script.google.com/macros/s/AKfycbxLKxLI8rVJMwSwd0oJ9jdyIZ4WZOl1cwI4WF72u0oOHklYP-QiB-gT-GtsLfHD9DQb/exec";  
-// Replace with the Web App URL you get after deployment
-
-document.getElementById("myForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-
-  fetch(scriptURL, {
-    method: "POST",
-    body: JSON.stringify({
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message")
-    }),
-
-
 // Create floating particles
 function createParticles() {
   const container = document.querySelector('.particle-container');
@@ -95,7 +78,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
-
 // Parallax effect
 window.addEventListener('scroll', () => {
   const scrolled = window.pageYOffset;
@@ -104,11 +86,27 @@ window.addEventListener('scroll', () => {
     el.style.transform = `translateY(${scrolled * speed}px)`;
   });
 });
-
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
+const scriptURL = "https://script.google.com/macros/s/AKfycbxLKxLI8rVJMwSwd0oJ9jdyIZ4WZOl1cwI4WF72u0oOHklYP-QiB-gT-GtsLfHD9DQb/exec";
 
+document.getElementById("myForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
 
+  fetch(scriptURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message")
+    })
+  })
+  .then(res => res.json())
+  .then(data => alert(data.message))
+  .catch(err => alert("Error: " + err));
+});
 
 
 
