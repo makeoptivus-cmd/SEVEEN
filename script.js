@@ -7,7 +7,7 @@
   .catch(err => alert("Error: " + err));
 });
 // 🔴 EDIT THIS LINE ONLY 🔴
-const scriptURL = "https://script.google.com/macros/s/AKfycbzNjORX9He6SEDRPJT5lndqTZQIkjxMwMFk5DZMZ0OM1kYu3JF5NbRjz_7MyewjlzOdbw/exec";  
+const scriptURL = "https://script.google.com/macros/s/AKfycbwuO6qQFIzsf2s6Cgk-Za6NB8uV2m2kDprkrA6sQE0FytcJUH7xSTbr2pEmIUDnlve4/exec";  
 // Replace with the Web App URL you get after deployment
 
 document.getElementById("myForm").addEventListener("submit", e => {
@@ -124,5 +124,6 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
+
 
 
