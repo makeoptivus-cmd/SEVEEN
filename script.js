@@ -88,7 +88,7 @@ window.addEventListener('scroll', () => {
 });
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
-const scriptURL = "https://script.google.com/macros/s/AKfycbxfNj63PnQaoLTh8JT5ftooXgMGeAgve-XZrbfGgJmmyjPTuZxpCwyUQAhx2Q1wbuis/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbz_q21Mw-OwDtW3MMvoZO3nokBx-r2GOxdGeN4PJUN60ZHcl6YUdles6vZfOVfsI0Ww/exec";
 
 document.getElementById("myForm").addEventListener("submit", e => {
   e.preventDefault();
@@ -107,6 +107,7 @@ document.getElementById("myForm").addEventListener("submit", e => {
   .then(data => alert(data.message))
   .catch(err => alert("Error: " + err));
 });
+
 
 
 
