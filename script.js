@@ -31,6 +31,14 @@ function submitForm(e) {
 
   saveMessages(name, emailid, msgContent);
 
+// Show alert
+  const alertBox = document.getElementById("alertBox");
+  alertBox.classList.add("show");
+
+  // Hide alert after 3 seconds
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+  }, 3000);
   // Reset form after submission
   e.target.reset();
 }
@@ -159,6 +167,7 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
+
 
 
 
