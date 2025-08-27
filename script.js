@@ -18,6 +18,11 @@ var contactFormDB = firebase.database().ref("contactForm");
 
 // Listen for form submit
 document.getElementById("contactForm").addEventListener("submit", submitForm);
+const getElementVal = (id) => {
+  const el = document.getElementById(id);
+  console.log("Fetched element:", id, "=>", el ? el.value : "NOT FOUND"); // Debug log
+  return el.value;
+};
 
 function submitForm(e) {
   e.preventDefault();
@@ -154,4 +159,5 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
+
 
