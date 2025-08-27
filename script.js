@@ -21,12 +21,17 @@ document.getElementById("contactForm").addEventListener("submit", submitForm);
 
 function submitForm(e) {
   e.preventDefault();
+  console.log("Form submitted 🚀");
 
   var name = getElementVal("name");
   var emailid = getElementVal("emailid");
   var msgContent = getElementVal("msgContent");
 
+  console.log("Data collected:", name, emailid, msgContent);
+
   saveMessages(name, emailid, msgContent);
+  e.target.reset();
+}
 
   // Optional: Reset form after submission
   document.getElementById("contactForm").reset();
@@ -149,3 +154,4 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
+
