@@ -49,3 +49,26 @@
 .service-card:hover .service-icon { transform: scale(1.1) rotate(5deg); }
 
 /* (rest of CSS from original preserved: scroll-reveal, stats, testimonial-card, inputs, parallax, chart-bar, typing-animation, nav-blur, etc.) */
+
+.alert {
+  margin-top: 15px;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #10b981; /* green */
+  color: white;
+  display: none; /* hidden by default */
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Show alert */
+.alert.show {
+  display: block;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
