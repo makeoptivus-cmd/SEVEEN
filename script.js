@@ -1,3 +1,53 @@
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDYeSu2BDMpdQ042B07l6y_a4g1GeJl8Yk",
+  authDomain: "optivus-b179b.firebaseapp.com",
+  databaseURL: "https://optivus-b179b-default-rtdb.firebaseio.com",
+  projectId: "optivus-b179b",
+  storageBucket: "optivus-b179b.firebasestorage.app",
+  messagingSenderId: "475218201986",
+  appId: "1:475218201986:web:d8b3e299b670b654a5539b",
+  measurementId: "G-QMRV28NFK6"
+};
+
+//intalze frebase
+firebase.initializeApp(firebaseConfig);
+
+//referance database
+var contactFormDB = firebase.database().ref("contactForm");
+
+// Listen for form submit
+document.getElementById("contactForm").addEventListener("submit", submitForm);
+
+function submitForm(e) {
+  e.preventDefault();
+
+  var name = getElementVal("name");
+  var emailid = getElementVal("emailid");
+  var msgContent = getElementVal("msgContent");
+
+  saveMessages(name, emailid, msgContent);
+
+  // Optional: Reset form after submission
+  document.getElementById("contactForm").reset();
+}
+
+// Save messages to Firebase
+const saveMessages = (name, emailid, msgContent) => {
+  var newContactForm = contactFormDB.push();
+  newContactForm.set({
+    name: name,
+    emailid: emailid,
+    msgContent: msgContent,
+    createdAt: new Date().toISOString()
+  });
+};
+
+// Get values by ID
+const getElementVal = (id) => {
+  return document.getElementById(id).value;
+};
+
 // Create floating particles
 function createParticles() {
   const container = document.querySelector('.particle-container');
