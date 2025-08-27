@@ -13,16 +13,11 @@ const firebaseConfig = {
 //intalze frebase
 firebase.initializeApp(firebaseConfig);
 
-//referance database
+// Reference database
 var contactFormDB = firebase.database().ref("contactForm");
 
 // Listen for form submit
 document.getElementById("contactForm").addEventListener("submit", submitForm);
-const getElementVal = (id) => {
-  const el = document.getElementById(id);
-  console.log("Fetched element:", id, "=>", el ? el.value : "NOT FOUND"); // Debug log
-  return el.value;
-};
 
 function submitForm(e) {
   e.preventDefault();
@@ -35,11 +30,9 @@ function submitForm(e) {
   console.log("Data collected:", name, emailid, msgContent);
 
   saveMessages(name, emailid, msgContent);
-  e.target.reset();
-}
 
-  // Optional: Reset form after submission
-  document.getElementById("contactForm").reset();
+  // Reset form after submission
+  e.target.reset();
 }
 
 // Save messages to Firebase
@@ -50,13 +43,20 @@ const saveMessages = (name, emailid, msgContent) => {
     emailid: emailid,
     msgContent: msgContent,
     createdAt: new Date().toISOString()
+  }).then(() => {
+    console.log("✅ Data saved to Firebase");
+  }).catch((err) => {
+    console.error("❌ Error saving data:", err);
   });
 };
 
 // Get values by ID
 const getElementVal = (id) => {
-  return document.getElementById(id).value;
+  const el = document.getElementById(id);
+  console.log("Fetched element:", id, "=>", el ? el.value : "NOT FOUND");
+  return el ? el.value : "";
 };
+
 
 // Create floating particles
 function createParticles() {
@@ -159,5 +159,6 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => { createParticles(); });
+
 
 
